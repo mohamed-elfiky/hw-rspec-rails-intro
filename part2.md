@@ -23,9 +23,12 @@ miserably, because there is no route that matches `POST /search_tmdb`
 (and even if there was a route, there would be no controller action
 defined to receive it).
 
-** Fix these errors by adding the correct route to `config/routes.rb`
+Fix these errors by adding the correct route to `config/routes.rb`
 to match this POST, and adding a controller action with an empty body
-to the Movies controller.  **  
+to the Movies controller.
+
+**Before you continue, make sure the above spec passes green.**
+
 Put another way, that one line of test code drove us to
 ensure that our new controller method and the view it will ultimately
 render have the correct names and have a matching route.
@@ -38,25 +41,38 @@ to illustrate some of the mechanics necessary to get your first specs
 running.  Usually, since each spec tends to be short, you'd complete a
 spec before re-running your tests.) 
 
-**This is the most important paragraph in this exercise:**  This test
+## The most important paragraph in this part of the exercise...
+
+This test
 is _not_ about whether the (not-yet-existing) model method does the
 right thing.  Per our initial desiderata, all we are checking here is
 that the controller tries to call that method, and passes it the
 correct argument(s) (in this case, the value the user typed in the
 form field).
 
-So we will set up a double for the model method--the code we wish we had--and check that our
-double is called.
+## ...OK, got that? Moving on.
 
-The code we wish we had 
-will be a class method, since finding movies in TMDb is 
-a behavior related to movies
-in general and not to a particular instance of a movie.
-The code we wish we had would probably accept
-a string representing what the user typed, and would probably return a
-collection of matching instances as `Movie` objects.
-If that method existed, our controller method might therefore
-call it like this:
+So this test is _not_ about the model method--but the controller
+action we're about to test needs to call the model method!  What do we
+do?
+
+The model method is the code we wish we had (how about "cw3h" for
+short?).  Since we don't have it, we set up a _double_ for the model
+method and check that our double is called.
+
+The cw3h will have to be a class method, since finding movies
+in TMDb is a behavior related to movies in general and not to a
+particular instance of a movie.  The cw3h would
+presumably accept a string representing what the user typed, and would
+return a collection of matching instances as `Movie` objects.
+Notice what we're doing here: we're fantasizing about the
+behavior we'd like the cw3h to have, _based on the way it's going to
+be used_ by its caller.  This is a key but often-overlooked benefit of
+TDD: it helps ensure that when you do write eventually write the cw3h,
+it will have just the right API for its job.
+
+Anyway, if the above cw3h existed as we have fantasized, our
+controller method would call it like this:
 
 ```ruby
 @movies = Movie.find_in_tmdb(params[:search_terms])
@@ -122,13 +138,12 @@ method call will return `nil` rather than a value chosen by us.
 this example isn't checking the return value, but we included it for
 illustrative purposes.)
 
-In any case, after each example is run, RSpec performs a _teardown_ step
-that restores the classes to their original
-condition, so if we wanted to perform these same fake-outs in other examples,
-we'd need to specify them in each one (though we'll soon see a
-way to DRY out such repetition).  This automatic teardown is another
-important part of keeping tests
-Independent. 
+In any case, after each example is run, RSpec performs a _teardown_
+step that restores the classes to their original condition, so if we
+wanted to perform these same fake-outs in other examples, we'd need to
+specify them in each one (though we'll soon see a way to DRY out such
+repetition).  This automatic teardown is another important part of
+keeping tests Independent.
 
 Now the test fails, but it fails for the right reason: we expected the
 controller action `search_tmdb` to call a method named `find_in_tmdb`
@@ -141,13 +156,11 @@ actually make it pass the test:
 ```
 
 If TDD is new to you, this has been a lot to absorb, especially when
-testing an app using a powerful  framework such as  Rails.  
-Don't worry---now
-that you have been exposed to the main concepts, the next round of specs
-will go faster.  It takes a bit of faith to jump into this system, but
-the reward is well worth it.  
-Consider having a sandwich and reviewing the concepts in this part
-before moving on.
+testing an app using a powerful framework such as Rails.  Don't
+worry---now that you have been exposed to the main concepts, the next
+round of specs will go faster.  It takes a bit of faith to jump into
+this system, but the reward is well worth it.  Consider having a
+sandwich and reviewing the concepts in this part before moving on.
 
 <details>
   <summary>
@@ -164,3 +177,6 @@ before moving on.
 </details>
 <br />
 
+<p align="center">
+<b><a href="README.md">&lt; Part 1</a> &bull; <a href="part3.md">&gt; Part 3</a></b>
+</p>
