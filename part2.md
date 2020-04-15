@@ -164,19 +164,19 @@ sandwich and reviewing the concepts in this part before moving on.
 
 <details>
   <summary>
-  Why must the `receive` expectation  come
-  **before** the `post` action in the test?
+  Why must the <code>receive</code> expectation  come
+  **before** the <code>post</code> action in the test?
   </summary>
   <p><blockquote>
   As part of the test setup, the expectation needs to establish a
-  method stub for `find_in_tmdb` that can be monitored to make sure it was
-  called.  Since the `post` action is eventually going to result in calling
-  `find_in_tmdb`, the double must be set up before the `post` 
+  method stub for <code>find_in_tmdb</code> that can be monitored to make sure it was
+  called.  Since the <code>post</code> action is eventually going to result in calling
+  <code>find_in_tmdb</code>, the double must be set up before the <code>post</code>
   occurs.
   </blockquote></p>
 </details>
 <br />
 
 <p align="center">
-<b><a href="README.md">&lt; Part 1</a> &bull; <a href="part3.md">&gt; Part 3</a></b>
+<b><a href="README.md">&lt; Part 1</a> &bull; <a href="part3.md">Part 3 &gt;</a></b>
 </p>

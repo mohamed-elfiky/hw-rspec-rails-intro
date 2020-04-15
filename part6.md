@@ -1,7 +1,7 @@
-## Part 6: the final controller spec
+## Part 4: the final controller spec
 
 There's just one example left to write, to check that the TMDb search
-results will be made available to the response view.  
+results will be made available to the response view.
 The RSpec `assigns()` method keeps track of what instance variables
 were assigned in the controller method.  Hence `assigns(:movies)`
 returns whatever value (if any) was assigned to `@movies` by the
@@ -78,8 +78,8 @@ easy enough to use them in this example.
   Specify whether each
   of the following RSpec constructs is used to (a) 
   create a seam, (b)  determine the behavior of a seam, (c)
-  neither:  (1) `assigns()` (2) `receive` (3) `expect` 
-  (4) `and_return`
+  neither:  (1) <code>assigns()</code> (2) <code>receive</code> (3) <code>expect</code> 
+  (4) <code>and_return</code>
   </summary>
   <p><blockquote>
        (1) c, (2) a, (3) b, (4) b
@@ -90,11 +90,11 @@ easy enough to use them in this example.
 
 <details>
   <summary>
-  Why is it usually preferable to use `before(:each)` rather than
-  `before(:all)` ?
+  Why is it usually preferable to use <code>before(:each)</code> rather than
+  <code>before(:all)</code> ?
   </summary>
   <p><blockquote>
-    `before(:each)` is run before each spec in that
+    <code>before(:each)</code> is run before each spec in that
     block, setting up identical preconditions for all those specs and
     thereby keeping them Independent.
   </blockquote></p>

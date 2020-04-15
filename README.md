@@ -13,10 +13,10 @@ cases are done.
 The assignment is a walkthrough-style, step-by-step tutorial with
 self-check questions.  It's divided into the following parts:
 
-0. Part 1: basic setup of RSpec and Guard, and how to manually and automatically run specs
-0. Part 2: From red to green: getting the first spec to pass
-0. Part 3: From green to refactor: more specs and DRYing out code
-0. Part 4: The model spec: stubbing the Internet with Webmock
+1. Basic setup of RSpec and Guard, and how to manually and automatically run specs
+2. From red to green: getting the first spec to pass
+3. From green to refactor: more specs and DRYing out code
+4. The model spec: stubbing the Internet with Webmock
 
 
 # Part 1: Getting started
@@ -187,5 +187,5 @@ shows, though, we must overcome a couple of hurdles just to get to the
 Red phase of Red--Green--Refactor.
 
 <p align="center"> 
-<b><a href="part2.md">Next: Part 2</a></b>
+<b><a href="part2.md">Part 2 &gt;</a></b>
 </p>
