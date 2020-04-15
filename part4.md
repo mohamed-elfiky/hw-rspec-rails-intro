@@ -1,7 +1,6 @@
-## Part 7: TDD for the Model
+# Part 4: TDD for the Model, and Stubbing the Internet
 
-
-Our next task will be to use TDD to create the model method
+Our final task will be to use TDD to create the model method
 `find_in_tmdb` that we've so far been stubbing out.  Since this method is
 supposed to call the actual TMDb service, we will again need to use
 stubbing, this time to avoid having our examples depend on the behavior of
@@ -22,23 +21,22 @@ flow---construct a RESTful URI that may include an API key, receive a
 JSON response---is a common pattern for interacting with
 external services.
 
-One way to call such an API  from Ruby would be to
-use the `URI` class in the Ruby standard library to construct the
-request URI, use the  `Net::HTTP` class
-to issue the request to TMDb,
-and parse the resulting JSON object.
-But sometimes we can be more productive by standing on the shoulders of
-others, as we can in this case.
-The gem `themoviedb-api`
-is a user-contributed Ruby "wrapper" around TMDb's RESTful
-API, mentioned on the TMDb API documentation pages.  
-Not every RESTful
-API has a corresponding Ruby library, but for those that do, such as
-TMDb, the library can hide the API details behind a few simple Ruby
-methods.
-In this case, the gem conveniently constructs the correct
-RESTful URIs, performs the remote service calls, and parses the JSON
-results into Ruby objects representing movies, playlists, and so on.
+In general there are (at least) two ways to construct external API
+calls in Ruby: directly or using a library.  The direct method would
+be to use the `URI` class in the Ruby standard library to construct
+the request URI, use the `Net::HTTP` class to issue the request to
+TMDb, check for errors in the response, and if all is well, and parse
+the resulting JSON object.  But sometimes we can be more productive by
+standing on the shoulders of others, as we can in this case by using a
+library (or in the Ruby world, a gem).  The gem `themoviedb-api` is a
+user-contributed Ruby "wrapper" around TMDb's RESTful API, mentioned
+on the TMDb API documentation pages.  Not every RESTful API has a
+corresponding Ruby library, but for those that do, such as TMDb,
+Stripe, and many others, the
+library can hide the API details behind a few simple Ruby methods.  In
+this case, the gem conveniently constructs the correct RESTful URIs,
+performs the remote service calls, and parses the JSON results into
+Ruby objects representing movies, playlists, and so on.
 
 ** TBD: Exercise:  get an API key and manually try out some requests
 from the `irb` command line.**
@@ -236,3 +234,8 @@ list of matches?
 [The Movie DB API wrapper
 gem](https://github.com/18Months/themoviedb-api)
 
+
+
+<p align="center">
+<b><a href="part3.md">&lt; Part 3</a></b>
+</p>

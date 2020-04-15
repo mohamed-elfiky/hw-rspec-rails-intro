@@ -15,9 +15,8 @@ self-check questions.  It's divided into the following parts:
 
 1. Basic setup of RSpec and Guard, and how to manually and automatically run specs
 2. From red to green: getting the first spec to pass
-3. From green to refactor: more specs and DRYing out code
+3. From green to refactor: more controller specs and DRYing out tests
 4. The model spec: stubbing the Internet with Webmock
-
 
 # Part 1: Getting started
 
