@@ -1,3 +1,7 @@
+<p align="center">
+<b><a href="part3.md">&lt; Part 3</a></b>
+</p>
+
 # Part 4: TDD for the Model, and Stubbing the Internet
 
 Our final task will be to use TDD to create the model method
@@ -38,8 +42,129 @@ this case, the gem conveniently constructs the correct RESTful URIs,
 performs the remote service calls, and parses the JSON results into
 Ruby objects representing movies, playlists, and so on.
 
-** TBD: Exercise:  get an API key and manually try out some requests
-from the `irb` command line.**
+## Using the TMDb API directly
+
+Whenever you set out to use a remote API, with or without a gem
+wrapper, you need to do some exploration to learn how the API works,
+and usually you'll need to get a developer API key as well,
+before even using the wrapper gem.
+
+* Spend a few minutes exploring the interactive Web version of [The
+Movie DB](themoviedb.org) to understand how you can do a search by
+movie title.
+
+* Next, briefly check out its [API
+documentation](https://developers.themoviedb.org/3) using the skills
+you learned earlier in the course.  In particular, familiarize
+yourself with the Search and Query for Details API calls.
+
+* Apply for an API key and note it somewhere secure.
+
+
+<details>
+<summary>
+  Suppose your API key was `5678`.  Construct a URI that would call
+  TMDb's search function to search for the made-for-TV movie "This
+  Life + 10".  (Don't
+  forget to [escape nonalphanumeric characters in the
+  URI](https://en.wikipedia.org/wiki/Percent-encoding). 
+  Here are two 
+  [online](https://www.url-encode-decode.com/) 
+  [tools](http://www.utilities-online.info/urlencode) 
+  to help you do this.  The Ruby library <a
+  href="https://ruby-doc.org/stdlib/libdoc/uri/rdoc/URI/Escape.html"<code>URI</code></a>
+  will do this programmatically, as in <code>URI::escape('https://some.url.com/etc.')</code>.
+</summary>
+<p><blockquote>
+  <code>https://api.themoviedb.org/3/search/movie?api_key=5678&amp;query=this%20life%20%2B%2010</code>
+  is  the official escaping, since hex 20 (decimal 32) is the ASCII
+  code for a space character and hex 2B (decimal 43) is the ASCII code
+  for the "+" symbol.  Another format that would work, because
+  escaping a space in a URL is a special case shortcut, would be 
+  <code>https://api.themoviedb.org/3/search/movie?api_key=5678&amp;query=this+life+%2B+10</code>.
+  
+
+</blockquote></p>
+</details>
+
+
+<details>
+<summary>
+  Use the <code>curl</code> command to actually issue this request to TMDb
+  from a terminal using your real API key.  What is the ID of the
+  returned match?
+</summary>
+<blockquote>
+  442668
+</blockquote>
+</details>
+
+## Using the TMDb API gem wrapper
+
+Now that you have a basic idea of the API call you're going to use,
+and an API key, you're ready to actually use the gem wrapper.
+
+* Add the line `gem 'themoviedb-api'` to your `Gemfile` and rerun
+`bundle` to install the gem.
+
+
+<details>
+<summary>
+Browse the gem's
+[documentation](https://github.com/18Months/themoviedb-api).  Write
+the two lines of Ruby code that would set your API key,
+and then call to TMDb to search for the movie "This Life + 10"
+and store the response in the variable <code>response</code>.
+</summary>
+<blockquote>
+<pre>
+Tmdb::Api.key("YOUR_KEY_HERE")
+response = Tmdb::Search.movie('This Life + 10')
+</pre>
+</blockquote>
+</details>
+
+Using the command line (<code>rails console</code> will give you a
+Ruby interpreter with all your Rails app files and gems loaded), 
+try those lines of code.  For example, assuming the result of the call
+is assigned to `response`, try `response.inspect`,
+`response.total_results`, `response.results`.
+
+<details>
+<summary>
+What Ruby expression would return the first element in the list of
+matching movies?
+</summary>
+<blockquote>
+<code>response.results[0]</code> or <code>response.results.first</code>
+</blockquote>
+</details>
+
+
+<details>
+<summary>
+What Ruby expression would set the variable  <code>overview</code> to
+the first search result's movie summary?
+</summary>
+<blockquote>
+<code>overview = response.results[0].overview</code>
+</blockquote>
+</details>
+
+
+<details>
+<summary>
+What Ruby expression would return the release date of the first search
+result, as a Ruby <code>Date</code> object?  (Hint: Rails has some <a
+href="https://guides.rubyonrails.org/active_support_core_extensions.html">convenient
+extensions</a> to help manage date and time objects.
+</summary>
+<blockquote>
+<code>Date.parse(response.results[0].release_date)</code> or
+<code>response.results[0].release_date.to_date</code>
+</blockquote>
+</details>
+
 
 <details>
   <summary>
@@ -58,20 +183,21 @@ from the `irb` command line.**
 
 <details>
   <summary>
-    true or false: in order to use
-  the tmdb api from another language such as java, we would need a java
-  library equivalent to `themoviedb-api` gem.
+  True or false: in order to use
+  the TMDb API from another language such as Python, we would need a Python
+  library equivalent to <code>themoviedb-api</code> gem.
   </summary>
   <p><blockquote>
-   false:  the api consists of a set of http requests and json responses,
-   so as long as we can transmit and receive bytes over tcp/ip and have
-   the ability to parse strings (the json responses), we can use the apis
+   False:  the API consists of a set of http requests and json responses,
+   so as long as we can transmit and receive bytes over TCP/IP and have
+   the ability to parse strings (the JSON responses), we can use the APIs
    without a special library.
   </blockquote></p>
 </details>
 <br />
 
 
+## Writing the model method and stubbing out TMDb's API
 
 
 By convention over configuration, specs for the `Movie`
@@ -227,12 +353,6 @@ end
 list of matches?
 
 * Todo: what if no results match?
-
-
-
-
-[The Movie DB API wrapper
-gem](https://github.com/18Months/themoviedb-api)
 
 
 

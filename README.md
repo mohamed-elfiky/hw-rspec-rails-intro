@@ -13,10 +13,10 @@ cases are done.
 The assignment is a walkthrough-style, step-by-step tutorial with
 self-check questions.  It's divided into the following parts:
 
-1. Basic setup of RSpec and Guard, and how to manually and automatically run specs
-2. From red to green: getting the first spec to pass
-3. From green to refactor: more controller specs and DRYing out tests
-4. The model spec: stubbing the Internet with Webmock
+* 1. Basic setup of RSpec and Guard, and how to manually and automatically run specs
+* [2.](part2.md) From red to green: getting the first spec to pass
+* [3.](part3.md) From green to refactor: more controller specs and DRYing out tests
+* [4.](part4.md) The model spec: stubbing the Internet with Webmock
 
 # Part 1: Getting started
 

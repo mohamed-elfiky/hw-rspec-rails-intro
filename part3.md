@@ -1,3 +1,8 @@
+
+<p align="center">
+<b><a href="part2.md">&lt; Part 2</a> &bull; <a href="part4.md">Part 4 &gt;</a></b>
+</p>
+
 # Part 3: More controller behaviors
 
 Returning to our original specfile skeleton,

@@ -1,3 +1,8 @@
+
+<p align="center">
+<b><a href="README.md">&lt; Part 1</a> &bull; <a href="part3.md">Part 3 &gt;</a></b>
+</p>
+
 ## Part 2: Getting the first spec to pass
 
 Whereas a "bare" `it` serves as a
