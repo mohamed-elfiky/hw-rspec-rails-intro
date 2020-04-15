@@ -8,9 +8,9 @@ stubbing, this time to avoid having our examples depend on the behavior of
 a remote Internet service.
 
 Like many SaaS applications, TMDb has a RESTful API that supports
-actions such as  ``search for movies matching 
-a keyword'' or ``retrieve detailed information about a specific
-movie''.
+actions such as  "search for movies matching 
+a keyword" or "retrieve detailed information about a specific
+movie".
 To prevent abuse and track each user of the API separately, each developer
 wishing to make calls to the API must first obtain their own _API key_
 by requesting one via the TMDb 
@@ -127,22 +127,22 @@ But in fact, querying TMDb requires a valid API key.
 
 The revised spec in Figure~\ref{fig:api_key_exception} expresses this
 implicit requirement as a new spec.
-Note that we have created \C{context} blocks to separate specs related to
-the happy path and specs related to the sad path.  \C{context} is just
-an alias for \C{describe} to make specs more readable, just as
-\C{Given/When/Then} are all aliases to the same method in Cucumber.
+Note that we have created `context` blocks to separate specs related to
+the happy path and specs related to the sad path.  `context` is just
+an alias for `describe` to make specs more readable, just as
+`Given/When/Then` are all aliases to the same method in Cucumber.
 Future happy-path specs can go inside the first group and future
 sad-path specs can go inside the second group.
 
 
 This leads to a new \x{implicit requirement} that we discovered while
-experimenting with the gem: "It should raise an ``invalid key''
+experimenting with the gem: "It should raise an "invalid key"
 exception if an invalid key is provided." 
 
 
 Unfortunately, this spec will actually call the real TMDb
-service every time it is executed, making the spec neither \B{F}ast
-(each call takes a few seconds to complete) nor \B{R}epeatable (the test
+service every time it is executed, making the spec neither **F**ast
+(each call takes a few seconds to complete) nor **R**epeatable (the test
 will behave differently if TMDb is down or your computer is not
 connected to the Internet).
 Even if you only ran tests while connected to the Internet, it is very
@@ -152,21 +152,21 @@ service.
 We can fix this by introducing a seam that isolates the caller from the
 callee.
 We know from Screencast~\ref{tmdb_gem_v4} that when an invalid key is
-used, \C{Tmdb::Movie.find} raises \C{Tmdb::InvalidApiKeyError},
-  \index{InvalidApiKeyError!TMDb}%
+used, `Tmdb::Movie.find` raises `Tmdb::InvalidApiKeyError`,
+  
 so we mimic that behavior with a stub,
 as line~10 of Figure~\ref{fig:movie_spec_3} shows.
-Observe that the argument of \C{expect} in line 11---the call to
-\modmeth---is in curly braces, the shorthand for a \C{do\ldots{}end}
+Observe that the argument of `expect` in line 11---the call to
+\modmeth---is in curly braces, the shorthand for a `do\ldots{`end}
 block.  This is because
-we \emph{expect} the call to raise an exception, but if a spec
+we _expect_ the call to raise an exception, but if a spec
 actually raises an exception, it stops the testing run!
-So in order to make the spec \B{S}elf-checking, we ``encapsulate''
-the code that will raise in exception in a \C{do\ldots{}end}---that is,
+So in order to make the spec **S**elf-checking, we "encapsulate"
+the code that will raise in exception in a `do\ldots{`end}---that is,
 in a block---that RSpec can execute in a controlled environment in
 which it can catch any 
 exceptions and match them to our expectation.
-  \index{lambda!catching exceptions in RSpec}%
+  
 
 This spec fails for the right reason, that is, because we
 haven't added code to \modmeth{} to check for an exception in the gem.
@@ -206,7 +206,7 @@ end
   exception? 
   \begin{answer}
      Line~7 replaces the \C{Tmdb::Movie.find} call with a stub,
-     preventing the ``real'' method from executing and raising an exception.
+     preventing the "real" method from executing and raising an exception.
   \end{answer}  
 \end{checkyourself}
 

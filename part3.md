@@ -1,6 +1,6 @@
-## Part 3: Getting the first spec to pass
+## Part 2: Getting the first spec to pass
 
-Whereas a ``bare'' `it` serves as a
+Whereas a "bare" `it` serves as a
 placeholder for a yet-to-be-written example, an `it` accompanied
 by a `do...end` block is an actual test case.
 Modify the first example to look like this:
@@ -75,11 +75,11 @@ end
 ```
 
 Since `find_in_tmdb` is code we don't yet have, the goal here is to
-``fake'' the 
+"fake" the 
 behavior it would exhibit if we did have it.  
 In particular, 
 we use RSpec's `double` method 
-to create an array of two ``test double'' `Movie` objects.  
+to create an array of two "test double" `Movie` objects.  
 Whereas a real `Movie` object would respond to methods like `title`
 and `rating`, the test double would raise an exception if you called
 any methods on it.  Given this fact, why would we use  doubles at
@@ -107,7 +107,7 @@ temporarily "overwritten" or shadowed by the stub.
 That's why in our case it doesn't matter that we
 haven't written the "real" `find_in_tmdb`: it wouldn't get called anyway!
 
-This use of `expect...to receive` to temporarily replace a ``real'' method
+This use of `expect...to receive` to temporarily replace a "real" method
 for testing purposes is an example of using a seam.
 
 The next line (really a continuation of the `expect`) specifies that
