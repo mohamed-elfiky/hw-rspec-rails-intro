@@ -1,6 +1,10 @@
 # Intro to RSpec and TDD
 
-In this assignment you will learn:
+In this assignment you will take a deep dive into both the concepts and mechanics of doing test-driven development (TDD) with the 
+RSpec testing framework, using the Guard tool to automatically re-run tests as you change code and using Webmock to provide "canned" responses for tests that exercise code that communicates with an external service.  The assignment is mostly a walkthrough step-by-step tutorial with self-check questions.  It's divided into the following parts:
+
+0. Part 1: basic setup of RSpec and Guard, and how to manually and automatically run specs
+0. Part 2: 
 
 TBD
 
